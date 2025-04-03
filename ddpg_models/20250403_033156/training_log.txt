@@ -1,0 +1,16 @@
+2025-04-03 03:31:56.412164: Starting overnight training with the following parameters:
+2025-04-03 03:31:56.412376: Total timesteps: 2000000
+2025-04-03 03:31:56.412549: Learning rate: 0.0003
+2025-04-03 03:31:56.412698: Batch size: 512
+2025-04-03 03:31:56.412846: Buffer size: 200000
+2025-04-03 03:31:56.412994: Exploration noise: 0.3
+2025-04-03 03:31:56.413142: Models directory: ./ddpg_models/20250403_033156/
+2025-04-03 03:31:56.413280: Log directory: ./ddpg_pyrace_tensorboard/20250403_033156/
+2025-04-03 03:32:00.477460: Loading checkpoint ./ddpg_models/ddpg_pyrace_v3_final.zip to continue training
+2025-04-03 03:32:00.491372: 
+Starting overnight training...
+2025-04-03 03:32:01.775035: Steps: 1000/2000000, FPS: 450.8, Time remaining: 1h 13m 54s
+2025-04-03 03:32:06.884497: Steps: 2000/2000000, FPS: 272.9, Time remaining: 2h 2m 0s
+2025-04-03 03:32:12.121496: Steps: 3000/2000000, FPS: 238.8, Time remaining: 2h 19m 23s
+2025-04-03 03:32:15.996002: Received interrupt signal. Saving model before exiting...
+2025-04-03 03:32:16.010268: Model saved successfully after interruption.

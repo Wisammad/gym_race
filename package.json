@@ -1,0 +1,22 @@
+{
+  "name": "palm-scanner-service",
+  "version": "1.0.0",
+  "description": "RESTful API service for palm scanner hardware",
+  "main": "scanner-service.js",
+  "scripts": {
+    "start": "node scanner-service.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "palm",
+    "scanner",
+    "biometrics",
+    "api"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2"
+  }
+} 

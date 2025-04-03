@@ -115,6 +115,26 @@ class PyraceContinuousWrapper(gym.Wrapper):
             # Reward faster movement
             speed_bonus = throttle * 20  # Higher throttle = higher reward
             shaped_reward += speed_bonus
+            
+            # Calculate actual speed - distance traveled since last step
+            # This is a better measurement than just throttle
+            current_dist = info.get('dist', 0)
+            if hasattr(self, 'prev_dist'):
+                speed = max(0, current_dist - self.prev_dist)
+                # Add time penalty to encourage faster driving
+                shaped_reward -= 2.0  # Small penalty per timestep
+                # Add progressive speed bonus (more speed = exponentially more reward)
+                shaped_reward += speed * speed * 5.0  # Quadratic reward for speed
+            else:
+                speed = 0
+            self.prev_dist = current_dist
+            
+            # Store speed in info dict for proper reporting
+            info['speed'] = speed
+        else:
+            # If crashed, speed is 0
+            info['speed'] = 0
+            self.prev_dist = info.get('dist', 0)
         
         # Ensure mode is still 0 for proper visualization if needed
         if self.pyrace_obj and hasattr(self.pyrace_obj, 'mode'):
@@ -129,6 +149,7 @@ class PyraceContinuousWrapper(gym.Wrapper):
             f"Action: {discrete_action}",
             f"Raw Reward: {reward:.2f}",
             f"Shaped Reward: {shaped_reward:.2f}",
+            f"Speed: {info.get('speed', 0):.2f}",
             f"Checkpoints: {info.get('check', 0)}/7",
             f"Distance: {info.get('dist', 0):.1f}",
             f"Crash: {info.get('crash', False)}"
@@ -167,6 +188,9 @@ class PyraceContinuousWrapper(gym.Wrapper):
         # Reset action history
         self.action_history = []
         self.last_throttle = 0.0
+        
+        # Reset for speed calculation
+        self.prev_dist = 0.0
         
         # Set up visualization if needed
         if self.pyrace_obj and hasattr(self.pyrace_obj, 'mode'):

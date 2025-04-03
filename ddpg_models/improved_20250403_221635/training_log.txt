@@ -1,0 +1,18 @@
+2025-04-03 22:16:37.294767: Starting improved training with the following parameters:
+2025-04-03 22:16:37.295317: Total timesteps: 300000
+2025-04-03 22:16:37.295771: Learning rate: 0.0003
+2025-04-03 22:16:37.296177: Batch size: 1024
+2025-04-03 22:16:37.296574: Buffer size: 300000
+2025-04-03 22:16:37.296939: Exploration noise: 0.6
+2025-04-03 22:16:37.297295: Tau (soft update): 0.005
+2025-04-03 22:16:37.297650: Gradient steps: 8
+2025-04-03 22:16:37.298152: Learning starts: 1000
+2025-04-03 22:16:37.298589: Network architecture: {'net_arch': {'pi': [512, 400, 300], 'qf': [512, 400, 300]}, 'activation_fn': <class 'torch.nn.modules.activation.ReLU'>, 'n_critics': 1}
+2025-04-03 22:16:37.299222: Models directory: ./ddpg_models/improved_20250403_221635/
+2025-04-03 22:16:37.299607: Log directory: ./ddpg_pyrace_tensorboard/improved_20250403_221635/
+2025-04-03 22:16:37.300090: Visualization enabled: False
+2025-04-03 22:16:37.300724: 
+Starting training...
+2025-04-03 22:16:37.325419: Error during training: Trying to log data to tensorboard but tensorboard is not installed.
+2025-04-03 22:16:37.359412: Model saved despite error.
+2025-04-03 22:16:37.404770: Training session ended.

@@ -1,0 +1,21 @@
+2025-04-03 22:25:16.765317: Starting improved training with the following parameters:
+2025-04-03 22:25:16.765790: Total timesteps: 300000
+2025-04-03 22:25:16.766319: Learning rate: 0.0003
+2025-04-03 22:25:16.766773: Batch size: 1024
+2025-04-03 22:25:16.767123: Buffer size: 300000
+2025-04-03 22:25:16.767506: Exploration noise: 0.6
+2025-04-03 22:25:16.767890: Tau (soft update): 0.005
+2025-04-03 22:25:16.768515: Gradient steps: 8
+2025-04-03 22:25:16.769013: Learning starts: 1000
+2025-04-03 22:25:16.769531: Network architecture: {'net_arch': {'pi': [512, 400, 300], 'qf': [512, 400, 300]}, 'activation_fn': <class 'torch.nn.modules.activation.ReLU'>, 'n_critics': 1}
+2025-04-03 22:25:16.770142: Models directory: ./ddpg_models/improved_20250403_222515/
+2025-04-03 22:25:16.770608: Log directory: ./ddpg_pyrace_tensorboard/improved_20250403_222515/
+2025-04-03 22:25:16.771002: Visualization enabled: False
+2025-04-03 22:25:16.771463: 
+Starting training...
+2025-04-03 22:25:18.423156: Steps: 1000/300000, FPS: 323.4, Recent avg reward: 0.0, Recent avg length: 0.0, Recent avg checkpoints: 0.0, Time remaining: 0h 15m 24s
+2025-04-03 22:29:32.560687: Steps: 2000/300000, FPS: 7.8, Recent avg reward: 0.0, Recent avg length: 0.0, Recent avg checkpoints: 0.0, Time remaining: 10h 38m 47s
+2025-04-03 22:33:50.819597: Steps: 3000/300000, FPS: 5.8, Recent avg reward: 0.0, Recent avg length: 0.0, Recent avg checkpoints: 0.0, Time remaining: 14h 10m 33s
+2025-04-03 22:36:09.053280: Received interrupt signal. Saving model before exiting...
+2025-04-03 22:36:09.136136: Model saved successfully after interruption.
+2025-04-03 22:36:09.169786: Training session ended.

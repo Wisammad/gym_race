@@ -1,0 +1,18 @@
+2025-04-03 22:24:41.486265: Starting improved training with the following parameters:
+2025-04-03 22:24:41.486957: Total timesteps: 300000
+2025-04-03 22:24:41.487445: Learning rate: 0.0003
+2025-04-03 22:24:41.487812: Batch size: 1024
+2025-04-03 22:24:41.488162: Buffer size: 300000
+2025-04-03 22:24:41.488516: Exploration noise: 0.6
+2025-04-03 22:24:41.488872: Tau (soft update): 0.005
+2025-04-03 22:24:41.489468: Gradient steps: 8
+2025-04-03 22:24:41.490048: Learning starts: 1000
+2025-04-03 22:24:41.490495: Network architecture: {'net_arch': {'pi': [512, 400, 300], 'qf': [512, 400, 300]}, 'activation_fn': <class 'torch.nn.modules.activation.ReLU'>, 'n_critics': 1}
+2025-04-03 22:24:41.491263: Models directory: ./ddpg_models/improved_20250403_222439/
+2025-04-03 22:24:41.491722: Log directory: ./ddpg_pyrace_tensorboard/improved_20250403_222439/
+2025-04-03 22:24:41.492168: Visualization enabled: False
+2025-04-03 22:24:41.492695: 
+Starting training...
+2025-04-03 22:24:41.516721: Error during training: You must install tqdm and rich in order to use the progress bar callback. It is included if you install stable-baselines with the extra packages: `pip install stable-baselines3[extra]`
+2025-04-03 22:24:41.549325: Model saved despite error.
+2025-04-03 22:24:41.584624: Training session ended.

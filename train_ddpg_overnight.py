@@ -3,6 +3,8 @@ import pyrace_continuous_wrapper  # Registers Pyrace-v3
 from stable_baselines3 import DDPG
 from stable_baselines3.common.noise import NormalActionNoise
 from stable_baselines3.common.callbacks import CheckpointCallback, BaseCallback
+from stable_baselines3.common.type_aliases import TrainFreq
+from stable_baselines3.common.utils import TrainFrequencyUnit
 import numpy as np
 import os
 import time
@@ -11,6 +13,7 @@ import signal
 import sys
 import pygame
 import argparse
+import torch
 
 # Parse command line arguments
 parser = argparse.ArgumentParser(description="Train DDPG model overnight")
@@ -38,10 +41,12 @@ log_file = os.path.join(models_dir, "training_log.txt")
 # Define training parameters for overnight training
 TOTAL_TIMESTEPS = args.timesteps  # Default to 2M steps or use command line arg
 SAVE_FREQ = 10000  # Save a checkpoint every 10k steps
-LEARNING_RATE = 3e-4
-BATCH_SIZE = 512  # Larger batch size for better stability
-BUFFER_SIZE = 200000  # Larger replay buffer
-EXPLORATION_NOISE = 0.3  # Higher exploration noise
+LEARNING_RATE = 1e-4  # Reduced learning rate for more stable learning
+BATCH_SIZE = 256  # Smaller batch size for better exploration
+BUFFER_SIZE = 1000000  # Much larger buffer to remember more experiences
+EXPLORATION_NOISE = 0.4  # Increased exploration noise
+TRAIN_FREQ = TrainFreq(1, TrainFrequencyUnit.STEP)  # Update the policy every step
+GRADIENT_STEPS = 1  # How many gradient steps to do at each update
 
 # Try to find the base PyRace environment
 def find_pyrace_obj(env, max_depth=10):
@@ -196,15 +201,18 @@ try:
         tensorboard_log=log_dir,
         learning_rate=LEARNING_RATE,
         buffer_size=BUFFER_SIZE,
-        learning_starts=1000,
+        learning_starts=5000,  # Wait for more samples before starting to learn
         batch_size=BATCH_SIZE,
+        train_freq=TRAIN_FREQ,
+        gradient_steps=GRADIENT_STEPS,
         gamma=0.99,
-        tau=0.005,
+        tau=0.001,  # Slower target network update for stability
         policy_kwargs=dict(
             net_arch=dict(
-                pi=[400, 300],  # Actor network based on original DDPG paper
-                qf=[400, 300]   # Critic network based on original DDPG paper
-            )
+                pi=[512, 400, 300],  # Deeper actor network
+                qf=[512, 400, 300]   # Deeper critic network
+            ),
+            activation_fn=torch.nn.ReLU  # ReLU activation for better gradients
         ),
     )
     
@@ -219,7 +227,18 @@ try:
     
     if latest_checkpoint:
         log_message(f"Loading checkpoint {latest_checkpoint} to continue training")
+        # Load the model but update its parameters
         model = DDPG.load(latest_checkpoint, env=env)
+        # Update the learning rate and other parameters
+        model.learning_rate = LEARNING_RATE
+        model.batch_size = BATCH_SIZE
+        model.buffer_size = BUFFER_SIZE
+        model.train_freq = TRAIN_FREQ
+        model.gradient_steps = GRADIENT_STEPS
+        model.tau = 0.001
+        # Update the action noise
+        model.action_noise = action_noise
+        log_message("Updated model parameters after loading checkpoint")
     
     # Train the model
     log_message("\nStarting overnight training...")

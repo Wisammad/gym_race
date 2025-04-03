@@ -8,7 +8,7 @@ class RaceEnv(gym.Env):
     def __init__(self, render_mode="human", ):
         print("init")
         self.action_space = spaces.Discrete(3)
-        self.observation_space = spaces.Box(np.array([0, 0, 0, 0, 0]), np.array([10, 10, 10, 10, 10]), dtype=int)
+        self.observation_space = spaces.Box(np.array([0, 0, 0, 0, 0]), np.array([10, 10, 10, 10, 10]), dtype=np.int64)
         self.is_view = True
         self.pyrace = PyRace2D(self.is_view)
         self.memory = []
@@ -21,14 +21,14 @@ class RaceEnv(gym.Env):
         self.msgs=[]
         self.pyrace = PyRace2D(self.is_view, mode = self.render_mode)
         obs = self.pyrace.observe()
-        return np.array(obs),{}
+        return np.array(obs, dtype=np.int64),{}
 
     def step(self, action):
         self.pyrace.action(action)
         reward = self.pyrace.evaluate()
         done   = self.pyrace.is_done()
         obs    = self.pyrace.observe()
-        return np.array(obs), reward, done, False, {'dist':self.pyrace.car.distance, 'check':self.pyrace.car.current_check, 'crash': not self.pyrace.car.is_alive}
+        return np.array(obs, dtype=np.int64), reward, done, False, {'dist':self.pyrace.car.distance, 'check':self.pyrace.car.current_check, 'crash': not self.pyrace.car.is_alive}
 
     # def render(self, close=False , msgs=[], **kwargs): # gymnasium.render() does not accept other keyword arguments
     def render(self): # gymnasium.render() does not accept other keyword arguments

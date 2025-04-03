@@ -1,0 +1,17 @@
+2025-04-03 04:17:36.928495: Starting overnight training with the following parameters:
+2025-04-03 04:17:36.928495: Total timesteps: 2000000
+2025-04-03 04:17:36.929495: Learning rate: 0.0003
+2025-04-03 04:17:36.929495: Batch size: 512
+2025-04-03 04:17:36.929495: Buffer size: 200000
+2025-04-03 04:17:36.930496: Exploration noise: 0.3
+2025-04-03 04:17:36.930496: Models directory: ./ddpg_models/20250403_041736/
+2025-04-03 04:17:36.931496: Log directory: ./ddpg_pyrace_tensorboard/20250403_041736/
+2025-04-03 04:17:36.931496: Visualization enabled: True
+2025-04-03 04:17:36.984513: Set view=True on RaceEnv
+2025-04-03 04:17:37.930834: Loading checkpoint ./ddpg_models/ddpg_pyrace_v3_final.zip to continue training
+2025-04-03 04:17:37.949840: 
+Starting overnight training...
+2025-04-03 04:17:37.950841: Visualization enabled. Press 'm' to toggle visualization mode, 'q' to quit.
+2025-04-03 04:17:37.998857: Could not find PyRace2D object directly
+2025-04-03 04:17:40.440685: Received interrupt signal. Saving model before exiting...
+2025-04-03 04:17:40.459692: Model saved successfully after interruption.
